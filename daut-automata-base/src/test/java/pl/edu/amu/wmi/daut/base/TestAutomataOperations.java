@@ -268,7 +268,7 @@ public class TestAutomataOperations extends TestCase {
     }
     
     /**
-     * Test metody zwracającej automat akceptujący różnice dwóch automatów.
+     * Test metody zwracającej automat akceptujący różnice dwoch automatow
      */
     public void testdifference() {
         
@@ -297,8 +297,8 @@ public class TestAutomataOperations extends TestCase {
         NondeterministicAutomatonByThompsonApproach automaton3 = new
         NondeterministicAutomatonByThompsonApproach(result);
         
-        assertTrue(automaton3.accepts("bbbbbbbbbbbbbbbbbbbbbbb"));
-        assertFalse(automaton3.accepts("aaabbbaabb"));
+        assertTrue(automaton3.accepts("bbbbbbbbbbbbbbbbbbbbbbbbbb"));
+        assertFalse(automaton3.accepts("aaabbbaabbb"));
         assertFalse(automaton3.accepts("aaa"));
         
       
