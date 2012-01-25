@@ -75,8 +75,7 @@ public class TestAutomataOperations extends TestCase {
 
         AutomatonSpecification result = AutomataOperations.sum(automatonA, automatonB);
 
-        NondeterministicAutomatonByThompsonApproach automaton = new
-        NondeterministicAutomatonByThompsonApproach(result);
+        NondeterministicAutomatonByThompsonApproach automaton = new NondeterministicAutomatonByThompsonApproach(result);
 
         assertTrue(automaton.accepts("aa"));
         assertTrue(automaton.accepts("ba"));
@@ -127,8 +126,7 @@ public class TestAutomataOperations extends TestCase {
 
         AutomatonSpecification result = AutomataOperations.sum(automatonB, automatonD);
 
-        NondeterministicAutomatonByThompsonApproach automaton = new
-        NondeterministicAutomatonByThompsonApproach(result);
+        NondeterministicAutomatonByThompsonApproach automaton = new NondeterministicAutomatonByThompsonApproach(result);
 
         assertTrue(automaton.accepts("ab"));
         assertTrue(automaton.accepts("abbabba"));
@@ -170,8 +168,7 @@ public class TestAutomataOperations extends TestCase {
 
         AutomatonSpecification result = AutomataOperations.sum(automatonB, automatonC);
 
-        NondeterministicAutomatonByThompsonApproach automaton = new
-        NondeterministicAutomatonByThompsonApproach(result);
+        NondeterministicAutomatonByThompsonApproach automaton = new NondeterministicAutomatonByThompsonApproach(result);
 
         assertTrue(automaton.accepts("babbaccddcaaccb"));
         assertTrue(automaton.accepts("bbaccddbaba"));
@@ -209,8 +206,7 @@ public class TestAutomataOperations extends TestCase {
 
         AutomatonSpecification result = AutomataOperations.sum(automatonB, automatonE);
 
-        NondeterministicAutomatonByThompsonApproach automaton = new
-        NondeterministicAutomatonByThompsonApproach(result);
+        NondeterministicAutomatonByThompsonApproach automaton = new NondeterministicAutomatonByThompsonApproach(result);
 
         assertTrue(automaton.accepts(""));
         assertTrue(automaton.accepts("aa"));
@@ -257,8 +253,7 @@ public class TestAutomataOperations extends TestCase {
 
         AutomatonSpecification result = AutomataOperations.sum(automatonB, automatonF);
 
-        NondeterministicAutomatonByThompsonApproach automaton = new
-        NondeterministicAutomatonByThompsonApproach(result);
+        NondeterministicAutomatonByThompsonApproach automaton = new NondeterministicAutomatonByThompsonApproach(result);
 
         assertTrue(automaton.accepts("aa"));
         assertTrue(automaton.accepts("b"));
@@ -266,75 +261,73 @@ public class TestAutomataOperations extends TestCase {
         assertFalse(automaton.accepts("aaabbbb"));
         assertFalse(automaton.accepts(""));
     }
-    
+
     /**
      * Test metody zwracającej automat akceptujący różnice dwoch automatow
      */
     public void testdifference() {
-        
+
         AutomatonSpecification automaton = new NaiveAutomatonSpecification();
 
         State q0 = automaton.addState();
-        
+
         automaton.markAsInitial(q0);
         automaton.markAsFinal(q0);
-        
+
         automaton.addLoop(q0, new CharTransitionLabel('a'));
         automaton.addLoop(q0, new CharTransitionLabel('b'));
-        
+
         AutomatonSpecification automaton2 = new NaiveAutomatonSpecification();
 
         State q0a = automaton2.addState();
-        
+
         automaton2.markAsInitial(q0a);
         automaton2.markAsFinal(q0a);
-        
+
         automaton2.addLoop(q0a, new CharTransitionLabel('a'));
-        
-        AutomatonSpecification result = AutomataOperations.diff(automaton, automaton2);
-        
-        
-        NondeterministicAutomatonByThompsonApproach automaton3 = new
-        NondeterministicAutomatonByThompsonApproach(result);
-        
+
+        AutomatonSpecification result = AutomataOperations.differenceAutomaton(automaton, automaton2, "ab");
+
+        NondeterministicAutomatonByThompsonApproach automaton3 = new NondeterministicAutomatonByThompsonApproach(result);
+
         assertTrue(automaton3.accepts("bbbbbbbbbbbbbbbbbbbbbbb"));
         assertFalse(automaton3.accepts("aaabbbaabb"));
         assertFalse(automaton3.accepts("aaa"));
-        
-      
-        
+
+
+
     }
+
     public void testdifference2() {
-        
+
         AutomatonSpecification automaton = new NaiveAutomatonSpecification();
 
         State q0 = automaton.addState();
         State q1 = automaton.addState();
-        
+
         automaton.markAsInitial(q0);
         automaton.markAsFinal(q1);
-        
-        automaton.addTransition(q0,q1, new CharTransitionLabel('b'));
+
+        automaton.addTransition(q0, q1, new CharTransitionLabel('b'));
         automaton.addLoop(q0, new CharTransitionLabel('a'));
         automaton.addLoop(q1, new CharTransitionLabel('a'));
         automaton.addLoop(q1, new CharTransitionLabel('b'));
-        
-        
+
+
         AutomatonSpecification automaton2 = new NaiveAutomatonSpecification();
 
         State q0a = automaton2.addState();
-        
+
         automaton2.markAsInitial(q0a);
         automaton2.markAsFinal(q0a);
-        
+
         automaton2.addLoop(q0a, new CharTransitionLabel('a'));
-        
-        AutomatonSpecification result = AutomataOperations.diff(automaton, automaton2);
-        
-        
-        NondeterministicAutomatonByThompsonApproach automaton3 = new
-        NondeterministicAutomatonByThompsonApproach(result);
-        
+
+        AutomatonSpecification result = AutomataOperations.differenceAutomaton(automaton, automaton2, "ab");
+
+
+        NondeterministicAutomatonByThompsonApproach automaton3 = new NondeterministicAutomatonByThompsonApproach(result);
+
         assertTrue(automaton3.accepts("b"));
         assertTrue(automaton3.accepts("baab"));
         assertTrue(automaton3.accepts("baa"));
@@ -343,79 +336,79 @@ public class TestAutomataOperations extends TestCase {
         assertFalse(automaton3.accepts("aaabbbaabb"));
         assertFalse(automaton3.accepts("aaa"));
         assertFalse(automaton3.accepts("a"));
-        
-      
+
+
     }
+
     public void testdifference3() {
-        
+
         AutomatonSpecification automaton = new NaiveAutomatonSpecification();
 
         State q0 = automaton.addState();
         State q1 = automaton.addState();
-        
+
         automaton.markAsInitial(q0);
         automaton.markAsFinal(q1);
-        
-        automaton.addTransition(q0,q1, new CharTransitionLabel('a'));
-        automaton.addTransition(q0,q1, new CharTransitionLabel('b'));
-              
-        
+
+        automaton.addTransition(q0, q1, new CharTransitionLabel('a'));
+        automaton.addTransition(q0, q1, new CharTransitionLabel('b'));
+
+
         AutomatonSpecification automaton2 = new NaiveAutomatonSpecification();
 
         State q0a = automaton2.addState();
         State q1a = automaton2.addState();
         State q2a = automaton2.addState();
-        
+
         automaton2.markAsInitial(q0a);
         automaton2.markAsFinal(q2a);
-        
-        automaton2.addTransition(q0a,q1a, new CharTransitionLabel('c'));
-        automaton2.addTransition(q0a,q1a, new CharTransitionLabel('d'));
-        automaton2.addTransition(q1a,q2a, new CharTransitionLabel('d'));
-        
-        AutomatonSpecification result = AutomataOperations.diff(automaton, automaton2);
-        
-        
-        NondeterministicAutomatonByThompsonApproach automaton3 = new
-        NondeterministicAutomatonByThompsonApproach(result);
-        
+
+        automaton2.addTransition(q0a, q1a, new CharTransitionLabel('c'));
+        automaton2.addTransition(q0a, q1a, new CharTransitionLabel('d'));
+        automaton2.addTransition(q1a, q2a, new CharTransitionLabel('d'));
+
+        AutomatonSpecification result = AutomataOperations.differenceAutomaton(automaton, automaton2, "abcd");
+
+
+        NondeterministicAutomatonByThompsonApproach automaton3 = new NondeterministicAutomatonByThompsonApproach(result);
+
         assertTrue(automaton3.accepts("a"));
         assertTrue(automaton3.accepts("b"));
         assertFalse(automaton3.accepts("aaabbbaabb"));
         assertFalse(automaton3.accepts("d"));
         assertFalse(automaton3.accepts("c"));
-    } 
-    
+    }
+
     public void testdifference4() {
-        
+
         AutomatonSpecification automaton = new NaiveAutomatonSpecification();
 
         State q0 = automaton.addState();
         State q1 = automaton.addState();
-        
+
         automaton.markAsInitial(q0);
         automaton.markAsFinal(q1);
-        
-        automaton.addTransition(q0,q1, new CharTransitionLabel('a'));
-        automaton.addTransition(q0,q1, new CharTransitionLabel('b'));
-              
-        
+
+        automaton.addTransition(q0, q1, new CharTransitionLabel('a'));
+        automaton.addTransition(q0, q1, new CharTransitionLabel('b'));
+
+
         AutomatonSpecification automaton2 = new NaiveAutomatonSpecification();
 
         State q0a = automaton.addState();
         State q1a = automaton.addState();
-        
+
         automaton.markAsInitial(q0a);
         automaton.markAsFinal(q1a);
-        
-        automaton.addTransition(q0a,q1a, new CharTransitionLabel('a'));
-        automaton.addTransition(q0a,q1a, new CharTransitionLabel('b'));
-              
-        AutomatonSpecification result = AutomataOperations.diff(automaton, automaton2);
-        
-        
-        
+
+        automaton.addTransition(q0a, q1a, new CharTransitionLabel('a'));
+        automaton.addTransition(q0a, q1a, new CharTransitionLabel('b'));
+
+        AutomatonSpecification result = AutomataOperations.differenceAutomaton(automaton, automaton2, "ab");
+
+
+
         assertTrue(result.isEmpty());
-        
+
     }
 }
