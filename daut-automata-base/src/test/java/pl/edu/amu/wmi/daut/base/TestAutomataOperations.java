@@ -297,8 +297,8 @@ public class TestAutomataOperations extends TestCase {
         NondeterministicAutomatonByThompsonApproach automaton3 = new
         NondeterministicAutomatonByThompsonApproach(result);
         
-        assertTrue(automaton3.accepts("bbbbbbbbbbbbbbbbbbbbbbbbbb"));
-        assertFalse(automaton3.accepts("aaabbbaabbb"));
+        assertTrue(automaton3.accepts("bbbbbbbbbbbbbbbbbbbbbbb"));
+        assertFalse(automaton3.accepts("aaabbbaabb"));
         assertFalse(automaton3.accepts("aaa"));
         
       
