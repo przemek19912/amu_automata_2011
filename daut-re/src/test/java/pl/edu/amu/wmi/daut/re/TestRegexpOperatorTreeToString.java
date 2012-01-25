@@ -15,7 +15,7 @@ import junit.framework.TestCase;
 public class TestRegexpOperatorTreeToString extends TestCase {
     
     /**
-     * Test.
+     * Test - zadanie #538.
      */
     public void test1() {
         List<RegexpOperatorTree> subtrees = new ArrayList<RegexpOperatorTree>();
