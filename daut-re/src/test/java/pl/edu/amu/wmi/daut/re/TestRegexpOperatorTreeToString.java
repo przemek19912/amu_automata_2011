@@ -10,7 +10,7 @@ import junit.framework.TestCase;
 
 /**
  *
- * @author wintron
+ * @author przemek19912
  */
 public class TestRegexpOperatorTreeToString extends TestCase {
     
